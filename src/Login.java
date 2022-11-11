@@ -15,7 +15,6 @@ class Login extends JFrame{
     JComboBox comboLoginType;
     String[] loginType = {"Administrator", "Lekarz", "Pacjent"};
     String userType = "ADMIN";
-
     Login(){
         Font f=new Font("Arial",Font.BOLD,24);
         l1=new JLabel("Logowanie");
@@ -81,17 +80,18 @@ class Login extends JFrame{
                             new Admin();
                         }
                         else if ("DOCTORS".equals(userType)) {
-                            new Doctor();
+                            new Doctor(rs.getInt("DOCTOR_ID"));
                         }
                         else if ("PATIENTS".equals(userType)) {
-                            new Patient();
+                            new Patient(rs.getInt("PATIENT_ID"));
                         }
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Niepoprawne dane!!");
                     }
+                    con.close();
                 } catch (SQLException e) {
-                    System.out.println("Error during connection with database:");
+                    System.out.println("[LOGIN] Błąd podczas łączenia z bazą danych:");
                     throw new RuntimeException(e);
                 }
             }
