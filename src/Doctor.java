@@ -11,6 +11,7 @@ class Doctor extends JFrame{
     JLabel title, hello;
     JButton loguot;
     int doctorID;
+    String doctorName;
     ResultSet doctorData;
     Doctor(int id) {
         doctorID = id;
@@ -30,6 +31,12 @@ class Doctor extends JFrame{
             throw new RuntimeException(e);
         }
     }
+
+    Doctor(String name, int id){
+        doctorID = id;
+        doctorName = name;
+    }
+
     void doctorPanel() throws SQLException {
         System.out.println(doctorData.getString("USER_NAME"));
         Font panelFont=new Font("Arial",Font.BOLD,26);
