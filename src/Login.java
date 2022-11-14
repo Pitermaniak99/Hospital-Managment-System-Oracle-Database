@@ -60,16 +60,13 @@ class Login extends JFrame{
                     else if (comboLoginType.getSelectedItem() == "Pacjent") {
                         userType = "PATIENTS";
                     }
-                    System.out.println(userType);
                 }
-                }
-        });
+            }});
 
         b1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
                 try {
                     Connection con = DriverManager.getConnection(dbURL, username, password);
-                    System.out.println("Connected to Oracle database");
                     String sql = "select * from "+userType+" where user_name='"+t1.getText()+"' and password='"+t2.getText()+"'";
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery();
@@ -91,13 +88,9 @@ class Login extends JFrame{
                     }
                     con.close();
                 } catch (SQLException e) {
-                    System.out.println("[LOGIN] Błąd podczas łączenia z bazą danych:");
+                    System.out.println("Błąd podczas logowania:");
                     throw new RuntimeException(e);
                 }
-            }
-        });
+            }});
     }
-//    public static void main(String[] args){
-//        Login login=new Login();
-//    }
 }

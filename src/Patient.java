@@ -16,11 +16,8 @@ class Patient extends JFrame{
 
     Patient(int id) throws SQLException {
         patientID = id;
-        System.out.println(patientID);
-
         try {
             Connection con = DriverManager.getConnection(dbURL, username, password);
-            System.out.println("Connected to Oracle database");
             String sql = "select * from PATIENTS where patient_id='" + patientID + "'";
             PreparedStatement ps = con.prepareStatement(sql);
             patientData = ps.executeQuery();
@@ -29,7 +26,7 @@ class Patient extends JFrame{
             con.close();
             patientPanelHome();
         } catch (SQLException e) {
-            System.out.println("Błąd podczas łączenia z bazą danych:");
+            System.out.println("Błąd podczas tworzenie obiektu pacienta:");
             throw new RuntimeException(e);
         }
     }
@@ -39,7 +36,7 @@ class Patient extends JFrame{
         patientName = name;
     }
 
-    void patientPanelTemplate(){
+    public void patientPanelTemplate(){
         Font panelFont=new Font("Arial",Font.BOLD,22);
         title=new JLabel("PANEL PACJENTA");
         title.setFont(panelFont);
@@ -58,8 +55,6 @@ class Patient extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     void patientPanelHome() throws SQLException {
-        System.out.println(patientName);
-
         patientPanelTemplate();
 
         newAppointment=new JButton("Umów nową wizytę");
@@ -95,6 +90,8 @@ class Patient extends JFrame{
             }
         });
     }
+
+
     public static void main(String[] args) {
         Appointment createApp;
         createApp = new Appointment(1, "Błażej Ostrowski");
