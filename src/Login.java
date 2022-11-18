@@ -45,6 +45,7 @@ class Login extends JFrame{
         setLayout(null);
         setVisible(true);
         setSize(500,500);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         comboLoginType.addActionListener(new ActionListener() {

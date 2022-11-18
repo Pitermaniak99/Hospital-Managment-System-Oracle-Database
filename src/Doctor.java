@@ -55,6 +55,7 @@ class Doctor extends JFrame{
         setLayout(null);
         setVisible(true);
         setSize(1200,1000);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         loguot.addActionListener(new ActionListener() {

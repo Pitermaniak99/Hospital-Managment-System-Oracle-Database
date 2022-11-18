@@ -38,40 +38,6 @@ class Appointment extends JFrame implements PropertyChangeListener {
         activeDoctor = new Doctor(doctorName, doctorID);
     }
 
-    void patientPanelTemplate() {
-        Font panelFont = new Font("Arial", Font.BOLD, 22);
-        activePatient.title = new JLabel("PANEL PACJENTA");
-        activePatient.title.setFont(panelFont);
-        activePatient.title.setBounds(20, 10, 350, 50);
-        add(activePatient.title);
-
-        Font helloFont = new Font("Arial", Font.BOLD, 20);
-        activePatient.hello = new JLabel("Witaj " + activePatient.patientName);
-        activePatient.hello.setFont(helloFont);
-        activePatient.hello.setBounds(20, 60, 350, 50);
-        add(activePatient.hello);
-
-        backButton = new JButton("Anuluj");
-        backButton.setBounds(500, 600, 100, 30);
-        add(backButton);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                try {
-                    new Patient(activePatient.patientID);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-        setLayout(null);
-        setVisible(true);
-        setSize(650, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-
     void calendar() {
         CalendarWindow calendarWindow = new CalendarWindow();
 
@@ -93,6 +59,16 @@ class Appointment extends JFrame implements PropertyChangeListener {
         });
         add(textField);
         add(calendarButton);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        //get the selected date from the calendar control and set it to the text field
+        if (event.getPropertyName().equals("selectedDate")) {
+            java.util.Calendar cal = (java.util.Calendar) event.getNewValue();
+            Date selDate = cal.getTime();
+            textField.setValue(selDate);
+        }
     }
 
     String dateFormatChange(Date fullDate){
@@ -180,7 +156,8 @@ class Appointment extends JFrame implements PropertyChangeListener {
     }
 
     void createAppointment() {
-        patientPanelTemplate();
+        JPanel template = activePatient.patientPanelTemplate();
+        add(template);
         calendar();
         selectingDoctorsSpec();
 
@@ -226,6 +203,21 @@ class Appointment extends JFrame implements PropertyChangeListener {
         dateText.setBounds(50, 400, 120, 30);
         add(dateText);
 
+        backButton = new JButton("Anuluj");
+        backButton.setBounds(500, 600, 100, 30);
+        add(backButton);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                try {
+                    new Patient(activePatient.patientID);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         addButton = new JButton("Zapisz zmiany");
         addButton.setBounds(350, 600, 130, 30);
         add(addButton);
@@ -246,17 +238,13 @@ class Appointment extends JFrame implements PropertyChangeListener {
                 }
                 else {JOptionPane.showMessageDialog(null, "Wybierz specjalizację!");}
             }});
-
+        setLayout(null);
+        setVisible(true);
+        setSize(650,700);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        //get the selected date from the calendar control and set it to the text field
-        if (event.getPropertyName().equals("selectedDate")) {
-            java.util.Calendar cal = (java.util.Calendar) event.getNewValue();
-            Date selDate = cal.getTime();
-            textField.setValue(selDate);
-        }
-    }
+
 
 }
