@@ -8,10 +8,8 @@ import java.io.Serial;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 class Appointment extends JFrame implements PropertyChangeListener {
     String dbURL = "jdbc:oracle:thin:@DESKTOP-7JS83K2:1522:xe";
@@ -21,21 +19,16 @@ class Appointment extends JFrame implements PropertyChangeListener {
     private static final long serialVersionUID = 1L;
     JFormattedTextField textField = new JFormattedTextField(DateFormat.getDateInstance(DateFormat.SHORT));
     String appointmentDate, spec;
-    int doctorID, appointmentID = 2;
+    int doctorID, appointmentID;
     JLabel specText, doctorText, dateText, panelDescription;
     JButton backButton, addButton;
     JComboBox specBox, doctorsBox = new JComboBox();
     ArrayList<String> specList = new ArrayList<>();
     ArrayList<Integer> doctorsIDList = new ArrayList<>();
     Patient activePatient;
-    Doctor activeDoctor;
 
     Appointment(int patientID, String patientName) {
         activePatient = new Patient(patientID, patientName);
-    }
-
-    Appointment(String doctorName, int doctorID) {
-        activeDoctor = new Doctor(doctorName, doctorID);
     }
 
     void calendar() {
@@ -113,15 +106,24 @@ class Appointment extends JFrame implements PropertyChangeListener {
             throw new RuntimeException(f);}
     }
 
-    int setAppoitmentID() {
+    int setAppointmentID() {
         try {
             Connection con = DriverManager.getConnection(dbURL, username, password);
             String sqlAppID = "select APPOINTMENT_ID from  APPOINTMENTS";
             PreparedStatement AppIDStatement = con.prepareStatement(sqlAppID);
             ResultSet AppIDSet = AppIDStatement.executeQuery();
-            while (AppIDSet.next()) { appointmentID = AppIDSet.getInt("APPOINTMENT_ID"); }
+            int previousAppointmentID;
+            int id = 0;
+            ArrayList<Integer> listOfID = new ArrayList<>();
+            while (AppIDSet.next()) {
+                id = AppIDSet.getInt("APPOINTMENT_ID");
+                listOfID.add(id);
+            }
+//            for (int i = 0; i<appointmentID; i++){
+//
+//            }
             con.close();
-            return appointmentID + 1;
+            return Collections.max(listOfID) + 1;
         } catch (SQLException f) {
             System.out.println("Błąd podczas pobierania ID spotkania:");
             throw new RuntimeException(f);}
@@ -227,7 +229,7 @@ class Appointment extends JFrame implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (!doctorsIDList.isEmpty()) {
                     appointmentDate = dateFormatChange((Date) textField.getValue());
-                    appointmentID = setAppoitmentID();
+                    appointmentID = setAppointmentID();
                     insertNewAppointment();
                     setVisible(false);
                     try {

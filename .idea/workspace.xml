@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ac8f45a-51eb-4205-9540-cef03651b937" name="Changes" comment="Adding appointments to database">
+    <list default="true" id="3ac8f45a-51eb-4205-9540-cef03651b937" name="Changes" comment="displaying formatted table with visits">
+      <change afterPath="$PROJECT_DIR$/src/ButtonColumn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Appointment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,9 +53,23 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Patient">
+  <component name="RunManager" selected="Application.Doctor">
     <configuration name="Appointment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Appointment" />
+      <module name="Hospital" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ButtonColumn" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ButtonColumn" />
+      <module name="Hospital" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Doctor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Doctor" />
       <module name="Hospital" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -75,9 +89,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Report" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Report" />
+      <module name="Hospital" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Doctor" />
+        <item itemvalue="Application.Report" />
         <item itemvalue="Application.Patient" />
+        <item itemvalue="Application.ButtonColumn" />
         <item itemvalue="Application.Appointment" />
       </list>
     </recent_temporary>
@@ -126,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668466929860</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="displaying formatted table with visits">
+      <created>1668812679972</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668812679972</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +177,7 @@
     <MESSAGE value="user recognition due logging" />
     <MESSAGE value="New appointment panel creation" />
     <MESSAGE value="Adding appointments to database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding appointments to database" />
+    <MESSAGE value="displaying formatted table with visits" />
+    <option name="LAST_COMMIT_MESSAGE" value="displaying formatted table with visits" />
   </component>
 </project>

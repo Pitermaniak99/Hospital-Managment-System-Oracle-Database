@@ -4,9 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 class Patient extends JFrame{
     String dbURL = "jdbc:oracle:thin:@DESKTOP-7JS83K2:1522:xe";
@@ -16,28 +14,34 @@ class Patient extends JFrame{
     int patientID, appointmentsNumber;
     String patientName;
     ArrayList<String> doctorNames = new ArrayList<>(), doctorSpecs = new ArrayList<>(), appointmentDates = new ArrayList<>();
-    ResultSet patientData;
 
     Patient(int id) throws SQLException {
         patientID = id;
-        try {
-            Connection con = DriverManager.getConnection(dbURL, username, password);
-            String sql = "select * from PATIENTS where patient_id='" + patientID + "'";
-            PreparedStatement ps = con.prepareStatement(sql);
-            patientData = ps.executeQuery();
-            patientData.next();
-            patientName = patientData.getString("USER_NAME");
-            con.close();
-            patientPanelHome();
-        } catch (SQLException e) {
-            System.out.println("Błąd podczas tworzenie obiektu pacienta:");
-            throw new RuntimeException(e);
-        }
+        patientName = getPatientName(patientID);
+        patientPanelHome();
     }
 
     Patient(int id, String name){
         patientID = id;
         patientName = name;
+    }
+
+    String getPatientName(int id) {
+        String name;
+        try {
+            Connection con = DriverManager.getConnection(dbURL, username, password);
+            String sql = "select USER_NAME from PATIENTS where patient_id='" + id + "'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet patientData;
+            patientData = ps.executeQuery();
+            patientData.next();
+            name = patientData.getString("USER_NAME");
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Błąd podczas pobieranie nazwy pacjenta:");
+            throw new RuntimeException(e);
+        }
+        return name;
     }
 
     JPanel patientPanelTemplate(){
@@ -173,7 +177,6 @@ class Patient extends JFrame{
 
         JScrollPane sp = new JScrollPane(appTable);
         JPanel tablePanel = new JPanel();
-
         tablePanel.add(sp);
         tablePanel.setSize(500, tableHeight);
         tablePanel.setLocation(75, 200);
@@ -199,7 +202,7 @@ class Patient extends JFrame{
 
     public static void main(String[] args) throws SQLException {
         Patient newPatient;
-        newPatient = new Patient(1);
+        newPatient = new Patient(2);
     }
 
 }
