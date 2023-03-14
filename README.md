@@ -7,20 +7,20 @@ Patients have the option of making appointments with doctors of the selected spe
 Doctors see a list of their appointments. After the visit begins, they issue a prescription.
 
 
-### Login panel
+## Login panel
 ![screenshot1](./Screenshots/start.png)
 
-### Patient menu
+## Patient menu
 ![Screenshot2](./Screenshots/Patient.png)
 
-### Registration for a visit
+## Registration for a visit
 ![screenshot3](./Screenshots/Appointment.png)
 
-### Patient visit list
+## Patient visit list
 ![screenshot4](./Screenshots/Appointments.png)
 
-### Doctor menu with lists of appointments
+## Doctor menu with lists of appointments
 ![screenshot5](./Screenshots/Doctor.png)
 
-### Issuing a prescription
+## Issuing a prescription
 ![screenshot6](./Screenshots/Report.png)
